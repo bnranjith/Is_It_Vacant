@@ -5,7 +5,9 @@
     android:background="#fff"
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <include
-        layout="@layout/horizontalscroll"/>
+        layout="@layout/horizontalscroll"
+        android:id="@+id/horizontalScrollView"/>
+
    <include
 
        layout="@layout/cardview"
