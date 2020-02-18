@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginTop="220dp"
+    android:layout_marginTop="260dp"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@color/cardview_shadow_end_color"
@@ -17,17 +17,8 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Categories"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical|center_horizontal"
-            android:textSize="32dp"
-            android:textStyle="bold"
 
-            android:textColor="#302D2D"
-            />
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -36,11 +27,15 @@
             android:layout_marginTop="30dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
-            app:cardBackgroundColor="#333"
+            app:cardBackgroundColor="#fff"
             android:layout_marginRight="30dp"
             android:layout_height="173dp"
             >
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/family"
+                />
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -50,10 +45,15 @@
             android:layout_marginTop="0dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
+            app:cardBackgroundColor="#fff"
             android:layout_marginRight="30dp"
             android:layout_height="173dp"
             >
-
+          <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:src="@drawable/couples"
+              />
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -63,12 +63,17 @@
             android:layout_marginTop="0dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
-            app:cardBackgroundColor="@color/material_on_surface_emphasis_medium"
+            android:background="@drawable/family"
+            app:cardBackgroundColor="#fff"
             android:layout_marginRight="30dp"
             android:layout_height="173dp"
             >
 
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/party"
+                />
 
 
         </androidx.cardview.widget.CardView>
