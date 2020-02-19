@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".profile_fragment"></activity>
+        <activity android:name=".couples"></activity>
+        <activity android:name=".party" />
+        <activity android:name=".family" />
+        <activity android:name=".profile_fragment" />
         <activity android:name=".Resevation_fragment" />
         <activity android:name=".Search_fragment" />
         <activity android:name=".Home_fragment" />
