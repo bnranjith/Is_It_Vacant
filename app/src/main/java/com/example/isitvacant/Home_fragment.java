@@ -1,12 +1,15 @@
 package com.example.isitvacant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class Home_fragment extends Fragment {
     private String mParam2;
     private String mParam3;
     private String mParam4;
+
+    CardView Family,Couples,Party;
 
     public Home_fragment() {
 
@@ -54,6 +59,31 @@ public class Home_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_home_fragment, container, false);
+        Family = view.findViewById(R.id.family);
+        Couples = view.findViewById(R.id.couples);
+        Party = view.findViewById(R.id.party);
+
+        Family.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               startActivity(new Intent(getContext(),family.class));
+                Toast.makeText(getContext(), "Family", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Couples.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),couples.class));
+                Toast.makeText(getContext(), "Couples", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Party.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),party.class));
+                Toast.makeText(getContext(), "Party", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 }

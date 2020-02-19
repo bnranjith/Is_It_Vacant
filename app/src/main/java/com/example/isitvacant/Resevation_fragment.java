@@ -1,6 +1,7 @@
 package com.example.isitvacant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -20,6 +21,7 @@ public class Resevation_fragment extends Fragment {
     private static final String ARG_PARAM4 = "param4";
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private Toolbar mToolbar;
     private TabsAccessorAdapter mytabsAccessorAdapter;
 
 
