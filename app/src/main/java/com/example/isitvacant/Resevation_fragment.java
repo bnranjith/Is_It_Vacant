@@ -1,12 +1,16 @@
 package com.example.isitvacant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class Resevation_fragment extends Fragment {
 
@@ -15,6 +19,10 @@ public class Resevation_fragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "param3";
     private static final String ARG_PARAM4 = "param4";
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
+    private Toolbar mToolbar;
+    private TabsAccessorAdapter mytabsAccessorAdapter;
 
 
     private String mParam1;
@@ -39,6 +47,7 @@ public class Resevation_fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -50,6 +59,13 @@ public class Resevation_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_resevation_fragment, container, false);
+        mViewPager = view.findViewById(R.id.main_tabs_pager);
+        mytabsAccessorAdapter = new TabsAccessorAdapter(getChildFragmentManager());
+        mViewPager.setAdapter(mytabsAccessorAdapter);
+        mTabLayout = view.findViewById(R.id.main_tab);
+        mTabLayout.setupWithViewPager(mViewPager);
+
         return view;
     }
+
 }
