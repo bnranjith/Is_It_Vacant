@@ -50,7 +50,7 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class profile_fragment extends Fragment {
-    EditText ET_NAME;
+    TextView ET_NAME;
     EditText ET_STATUS;
     FirebaseAuth mAuth;
 
