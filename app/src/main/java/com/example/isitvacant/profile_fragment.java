@@ -50,20 +50,15 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class profile_fragment extends Fragment {
-    TextView ET_NAME;
-    EditText ET_STATUS;
+    TextView ET_NAME, Edit,Setting;
     FirebaseAuth mAuth;
 
     FirebaseFirestore mstore;
     ProgressBar progressBar;
-    String finalResult;
     String uid;
-    String mobb,status;
-    TextView mob,nation_tv,gender_tv,dob_tv1;
-    private static final int GalleryPick=1;
+    private static final int GalleryPick = 1;
     CircleImageView circleImageView;
-    Button update_bt,logout_bt;
-    String name1;
+    Button logout_bt;
 
     private StorageReference userProfileImageRef;
 
@@ -77,12 +72,13 @@ public class profile_fragment extends Fragment {
     private String mParam2;
     private String mParam3;
     private String mParam4;
+
     public profile_fragment() {
 
     }
 
 
-    public static profile_fragment newInstance(String param1, String param2, String param3,String param4) {
+    public static profile_fragment newInstance(String param1, String param2, String param3, String param4) {
         profile_fragment fragment = new profile_fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -92,6 +88,7 @@ public class profile_fragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,12 +103,7 @@ public class profile_fragment extends Fragment {
         mstore = FirebaseFirestore.getInstance();
 
 
-
-
-                }
-
-
-
+    }
 
 
     @Override
@@ -119,19 +111,16 @@ public class profile_fragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-
-        if (requestCode==GalleryPick && resultCode== RESULT_OK && data != null)
-        {
+        if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null) {
 
 
-            Uri ImageUri=data.getData();
+            Uri ImageUri = data.getData();
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
+                    .setAspectRatio(1, 1)
                     .start(getContext(), this);
 
-        }
-        else{
+        } else {
             progressBar.setVisibility(View.INVISIBLE);
 
 
@@ -142,10 +131,8 @@ public class profile_fragment extends Fragment {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
 
-            if (resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
-
-
 
 
                 UploadTask uploadTask;
@@ -173,14 +160,12 @@ public class profile_fragment extends Fragment {
                             progressBar.setVisibility(View.INVISIBLE);
 
 
-
-                            Toast.makeText(getContext(),"Profile Image Uploaded Successfully",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Profile Image Uploaded Successfully", Toast.LENGTH_LONG).show();
                             final Uri downloadUri = task.getResult();
 
                             Map<String, Object> userMap = new HashMap<>();
 
                             userMap.put("image", downloadUri.toString());
-
 
 
                             mstore.collection("users")
@@ -201,33 +186,21 @@ public class profile_fragment extends Fragment {
                             });
 
 
-
-
-
-
-
-
-
-
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
-                            String error =task.getException().toString();
-                            Toast.makeText(getContext(),"Error"+error,Toast.LENGTH_LONG).show();
+                            String error = task.getException().toString();
+                            Toast.makeText(getContext(), "Error" + error, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
             }
 
-        }
-        else{
+        } else {
             progressBar.setVisibility(View.INVISIBLE);
 
         }
     }
-
-
-
 
 
     @Override
@@ -235,34 +208,16 @@ public class profile_fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_profile_fragment, container, false);
         ET_NAME = view.findViewById(R.id.update_user_name);
+        Edit = view.findViewById(R.id.Edit);
+        Setting = view.findViewById(R.id.Setting);
 
-        circleImageView= view.findViewById(R.id.profile_image);
-        mob = view.findViewById(R.id.update_mob);
-        nation_tv=view.findViewById(R.id.nation_tv);
-        gender_tv=view.findViewById(R.id.gender_tv);
-        dob_tv1=view.findViewById(R.id.dob_tv);
-
-        update_bt=view.findViewById(R.id.update_bt);
-        logout_bt=view.findViewById(R.id.logout);
-        logout_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                Intent intent = new Intent(getContext(),MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
+        circleImageView = view.findViewById(R.id.profile_image);
 
 
 
-
-
-        progressBar = (ProgressBar)view.findViewById(R.id.spin_kit);
-
+       progressBar = view.findViewById(R.id.spin_kit);
         Sprite doubleBounce = new DoubleBounce();
-        progressBar.setIndeterminateDrawable(doubleBounce);
-
+       progressBar.setIndeterminateDrawable(doubleBounce);
 
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
@@ -272,93 +227,43 @@ public class profile_fragment extends Fragment {
                 Intent galleryIntent = new Intent();
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent,GalleryPick);
+                startActivityForResult(galleryIntent, GalleryPick);
             }
         });
 
 
-        update_bt.setOnClickListener(new View.OnClickListener() {
+        Edit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                name1 = ET_NAME.getText().toString();
-                if (name1.isEmpty()) {
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), edit_profile.class));
+            }
+        });
 
-                    ET_NAME.setError("Mandatory Field...");
-
-
-
-                } else {
-                    mobb=mob.getText().toString();
-
-
-
+        Setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),setting.class));
+            }
+        });
 
 
 
+          return view;
+    }
+        @Override
+        public void onStart () {
+            super.onStart();
 
-                    Map<String, Object> userMap = new HashMap<>();
-
-                    userMap.put("name", name1);
-
-
-
-                    mstore.collection("users")
-                            .document(uid)
-                            .update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(getContext(), "User Profile Updated", Toast.LENGTH_LONG).show();
-                        }
-
-
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            String error = e.getMessage();
-                            Toast.makeText(getContext(), "Error" + error, Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-
-
-
-
-
-
-
+            uid = mAuth.getCurrentUser().getUid();
+            DocumentReference documentReference = mstore.collection("users").document(uid);
+            documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    ET_NAME.setText(documentSnapshot.getString("name"));
+                    Picasso.get().load(documentSnapshot.getString("image")).into(circleImageView);
 
 
                 }
-            }
-        });
-
-
-
-
-
-        return view;
+            });
+        }
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        uid = mAuth.getCurrentUser().getUid();
-        DocumentReference documentReference = mstore.collection("users").document(uid);
-        documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                ET_NAME.setText(documentSnapshot.getString("name"));
-
-                Picasso.get().load(documentSnapshot.getString("image")).into(circleImageView);
-
-                mob.setText(documentSnapshot.getString("Mobile"));
-
-                gender_tv.setText(documentSnapshot.getString("Gender"));
-                dob_tv1.setText(documentSnapshot.getString("Date Of Birth"));
-                nation_tv.setText(documentSnapshot.getString("Nationality"));
-
-            }
-        });
-    }
-}
