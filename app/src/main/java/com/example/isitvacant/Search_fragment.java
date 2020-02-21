@@ -2,6 +2,8 @@ package com.example.isitvacant;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,7 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
 public class Search_fragment extends Fragment {
+    private View view;
+    private RecyclerView findFriendRecyclerList;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference contactsRef = db.collection("restaurants");
+    private ContactsAdapter adapter;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -50,7 +64,38 @@ public class Search_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_search_fragment, container, false);
+        view = inflater.inflate(R.layout.activity_search_fragment, container, false);
+        findFriendRecyclerList = (RecyclerView) view.findViewById(R.id.find_frieds_recycler_list);
+        findFriendRecyclerList.setLayoutManager(new LinearLayoutManager(getContext()));
+        setUpRecyclerView();
+
         return view;
+    }
+
+    private void setUpRecyclerView() {
+
+        Query query = contactsRef.orderBy("name",Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<Contacts> options = new FirestoreRecyclerOptions.Builder<Contacts>()
+                .setQuery(query, Contacts.class)
+                .build();
+
+        adapter = new ContactsAdapter(options);
+
+        RecyclerView recyclerView = view.findViewById(R.id.find_frieds_recycler_list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+            adapter.startListening();
+
+        }
+
     }
 }
