@@ -9,7 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -22,7 +24,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class MainActivity extends AppCompatActivity {
+    boolean doubleBackToExitPressedOnce = false;
     FirebaseAuth mAuth;
+
 
     private FirebaseFirestore firebaseFirestore;
 
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        openFragment(Home_fragment.newInstance("", "", "",""));
+        openFragments(Home_fragment.newInstance("", "", "",""));
 
 
     }
@@ -48,13 +52,21 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void openFragments(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+
+
+        transaction.commit();
+    }
+
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            openFragment(Home_fragment.newInstance("", "", "",""));
+                            openFragments(Home_fragment.newInstance("", "", "",""));
                             return true;
                         case R.id.navigation_search:
                             openFragment(Search_fragment.newInstance("", "", "",""));
@@ -65,10 +77,35 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.navigation_profile:
                             openFragment(profile_fragment.newInstance("", "", "",""));
                             return true;
+
+
                     }
                     return false;
                 }
             };
+
+
+    @Override
+    public void onBackPressed() {
+        //Checking for fragment count on backstack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else if (!doubleBackToExitPressedOnce) {
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this,"Please click BACK again to exit.", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        } else {
+            super.onBackPressed();
+            return;
+        }
+    }
 
     @Override
     protected void onStart() {
