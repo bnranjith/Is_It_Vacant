@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/restaurant_click"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="170dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/restaurant_image"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="10dp"
+            android:elevation="5dp"
+            app:cardCornerRadius="20dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/couples"
+            android:scaleType="fitXY"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/restaurant_title"
+            android:layout_toRightOf="@id/restaurant_image"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="5dp"
+            android:hint="Title"
+            android:gravity="left|center"
+            android:textSize="18dp"
+            android:text="Kottara Food Court"
+            android:textColor="#000"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/restaurant_type"
+            android:layout_below="@+id/restaurant_title"
+            android:layout_width="250dp"
+            android:layout_height="23dp"
+            android:layout_toRightOf="@+id/restaurant_image"
+            android:layout_marginLeft="5dp"
+            android:hint="Non Veg"
+            android:text="Meals, Chinese, Shawarma"
+            android:gravity="left|center"
+            android:textSize="13dp"
+            android:textStyle="normal"/>
+
+        <TextView
+            android:id="@+id/restaurant_description"
+            android:layout_toRightOf="@+id/restaurant_image"
+            android:layout_below="@id/restaurant_type"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:hint="Descrption...."
+            android:text="Please do visit , we have the best food for family , can spend thier quality time,cheers"
+            android:gravity="start"
+            android:textSize="13dp"
+            android:lines="5"
+            android:textStyle="normal"/>
+        <ImageView
+            android:id="@+id/res_location_image"
+            android:layout_width="13dp"
+            android:layout_height="18dp"
+            android:layout_toRightOf="@id/restaurant_image"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/restaurant_description"
+            android:layout_marginTop="0dp"
+
+            android:src="@drawable/ic_location_on_black_24dp"
+            />
+        <TextView
+            android:id="@+id/restaurant_location"
+            android:layout_toRightOf="@id/res_location_image"
+            android:layout_below="@id/restaurant_description"
+            android:layout_width="250dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="4dp"
+            android:hint="location"
+            android:text="kottara chowki,Mangalore, Karnataka"
+            android:gravity="start"
+            android:textSize="12dp"
+            android:lines="5"
+            android:textStyle="normal"/>
+
+
+
+
+
+
+</RelativeLayout>
