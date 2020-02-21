@@ -70,14 +70,14 @@ public class Search_fragment extends Fragment {
         findFriendRecyclerList = (RecyclerView) view.findViewById(R.id.find_frieds_recycler_list);
         findFriendRecyclerList.setLayoutManager(new LinearLayoutManager(getContext()));
         searchText= view.findViewById(R.id.search);
-        query = contactsRef.orderBy("name",Query.Direction.DESCENDING);
+        query = contactsRef.orderBy("name");
         setUpRecyclerView(query);
 
 
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                query = contactsRef.orderBy("name",Query.Direction.DESCENDING);
+                query = contactsRef.orderBy("name");
                 setUpRecyclerView(query);
 
             }
@@ -85,7 +85,7 @@ public class Search_fragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length()==0){
-                    query = contactsRef.orderBy("name",Query.Direction.DESCENDING);
+                    query = contactsRef.orderBy("name");
                     setUpRecyclerView(query);
                     adapter.startListening();
 
