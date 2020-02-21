@@ -35,14 +35,21 @@
     </androidx.cardview.widget.CardView>
 
 
-       <include
-           android:layout_width="match_parent"
-           layout="@layout/restaurants_cardview"
-           android:layout_height="match_parent"
-           android:layout_marginTop="60dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/find_frieds_recycler_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchcard"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="75dp" />
 
 
-    
+
+
 
 
 </RelativeLayout>

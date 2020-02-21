@@ -3,6 +3,7 @@ package com.example.isitvacant;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ContactsAdapter extends FirestoreRecyclerAdapter<Contacts, ContactsAdapter.ContactsHolder> {
+public class RestaurantsAdapter extends FirestoreRecyclerAdapter<RestaurantsModel, RestaurantsAdapter.RestaurantsHolder> {
     private OnItemClickListener listener;
 
     /**
@@ -24,18 +25,21 @@ public class ContactsAdapter extends FirestoreRecyclerAdapter<Contacts, Contacts
      *
      * @param options
      */
-    public ContactsAdapter(@NonNull FirestoreRecyclerOptions<Contacts> options) {
+    public RestaurantsAdapter(@NonNull FirestoreRecyclerOptions<RestaurantsModel> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ContactsHolder holder, int position, @NonNull Contacts model) {
+    protected void onBindViewHolder(@NonNull RestaurantsHolder holder, int position, @NonNull RestaurantsModel model) {
 
 
-        holder.userName.setText(model.getName());
-        holder.userStatus.setText(model.getStatus());
-        //holder.userProfileImage.setImageDrawable(model.getImage()););
-        Picasso.get().load(model.getImage()).into(holder.userProfileImage);
+        holder.restoName.setText(model.getName());
+        holder.restoAddr.setText(model.getLocation());
+        holder.restoType.setText(model.getTypes());
+
+        holder.restoDis.setText(model.getDiscription());
+
+        Picasso.get().load(model.getImage()).into(holder.restoImage);
 
 
 
@@ -43,24 +47,26 @@ public class ContactsAdapter extends FirestoreRecyclerAdapter<Contacts, Contacts
 
     @NonNull
     @Override
-    public ContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RestaurantsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contacts_cards_layout, parent, false);
-        return new ContactsHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurants_cardview, parent, false);
+        return new RestaurantsHolder(view);
     }
 
-    class ContactsHolder extends RecyclerView.ViewHolder{
+    class RestaurantsHolder extends RecyclerView.ViewHolder{
 
-        TextView userName;
-        TextView userStatus;
-        CircleImageView userProfileImage;
+        TextView restoName,restoType,restoAddr;
+        TextView restoDis;
+        ImageView restoImage;
 
-        public ContactsHolder(@NonNull View itemView) {
+        public RestaurantsHolder(@NonNull View itemView) {
             super(itemView);
 
-            userName = itemView.findViewById(R.id.user_profile_name);
-            userStatus = itemView.findViewById(R.id.user_status_textview);
-            userProfileImage = itemView.findViewById(R.id.users_profile_image);
+            restoName = itemView.findViewById(R.id.restaurant_title);
+            restoDis = itemView.findViewById(R.id.restaurant_description);
+            restoImage = itemView.findViewById(R.id.restaurant_image);
+            restoType = itemView.findViewById(R.id.restaurant_type);
+            restoAddr = itemView.findViewById(R.id.restaurant_location);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
