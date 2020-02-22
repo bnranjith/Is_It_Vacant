@@ -18,7 +18,7 @@ public class RestaurantsDetails extends AppCompatActivity {
     FirebaseFirestore mstore;
     FirebaseAuth mAuth;
     TextView RESTO_NAME;
-    String profileRestoName,proUid,proRestoImage,proUserStatus,proMobile,proRestoGstin,proRestoAddr,proRestoDesc,proRestoType;
+    String profileRestoName,proUid,proRestoImage,proMobile,proRestoGstin,proRestoAddr,proRestoDesc,proRestoType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
