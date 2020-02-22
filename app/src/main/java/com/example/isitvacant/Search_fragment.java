@@ -4,7 +4,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -72,6 +75,23 @@ public class Search_fragment extends Fragment {
         searchText= view.findViewById(R.id.search);
         query = contactsRef.orderBy("name");
         setUpRecyclerView(query);
+        adapter.setOnItemClickListener(new RestaurantsAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(DocumentSnapshot documentSnapshot, int position) {
+                String[] pathwithuid;
+                String path =documentSnapshot.getReference().getPath();
+                //Toast.makeText(FindFriendsActivity.this,"Position"+position+"\t UID:"+id,Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(),RestaurantsDetails.class);
+
+                pathwithuid = path.split("/");
+                String uid2=pathwithuid[1];
+                intent.putExtra("uid",uid2);
+
+
+                startActivity(intent);
+
+            }
+        });
 
 
         searchText.addTextChangedListener(new TextWatcher() {
