@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rating_pop_background"
+    tools:context=".pop_up_rating">
+
+    <TextView
+        android:id="@+id/text_rate"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:text="RATE"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text_rate"
+        android:layout_marginTop="20dp"
+        android:saveEnabled="true"
+        android:theme="@style/RatingBar"
+        android:rating="0.2"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:numStars="5"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/rating_bar"
+        android:layout_marginTop="25dp"
+        android:hint="Write your Review"
+        android:textSize="15dp"
+
+        android:padding="5dp"
+        android:background="@drawable/rounded_edit_text"
+        android:inputType="textMultiLine"
+        android:gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Submit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:elevation="20dp"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="SUBMIT"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:background="@drawable/gradient_style"
+            android:textStyle="bold"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

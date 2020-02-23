@@ -91,7 +91,26 @@
             android:textSize="12dp"
             android:lines="5"
             android:textStyle="normal"/>
-
+        <androidx.cardview.widget.CardView
+            android:id="@+id/food_rating"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:cardBackgroundColor="#0091EA"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="10dp"
+            android:elevation="0dp">
+                <TextView
+                    android:id="@+id/food_rating_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:text="4.2"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:gravity="center"/>
+        </androidx.cardview.widget.CardView>
 
 
 
