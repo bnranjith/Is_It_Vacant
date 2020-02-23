@@ -2,22 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RestaurantsDetails">
+    <include
+        layout="@layout/restaurant_details_include_layout"/>
 
-    <TextView
-        android:id="@+id/restoName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="234dp"
-        android:layout_marginEnd="176dp"
-        android:text="name"
-        android:textSize="30dp" />
-
-</RelativeLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:elevation="20dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="135dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="10dp"
+            android:layout_gravity="center"
+            android:elevation="5dp">
+        <Button
+            android:id="@+id/Book_now"
+            android:layout_width="135dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="#0085EA"
+            android:text="Book Now"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:elevation="30dp"
+            />
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
